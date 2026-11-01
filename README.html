@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CSE Digital Hub Setup Guide</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        line-height: 1.7;
+        color: #1e293b;
+        margin: 0 auto;
+        max-width: 980px;
+        padding: 32px 20px 72px;
+      }
+      h1, h2, h3 { color: #163b70; }
+      code, pre { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; }
+      pre { padding: 16px; overflow-x: auto; }
+      code { padding: 2px 6px; }
+      ul { padding-left: 1.4rem; }
+      a { color: #2563eb; }
+    </style>
+  </head>
+  <body>
+    <h1>CSE Digital Hub - Setup Guide</h1>
+
+    <h2>1. Run the site</h2>
+    <ol>
+      <li>Open the <code>cse site</code> folder in VS Code.</li>
+      <li>Set the admin password in the environment before starting the server. In PowerShell, enter it without saving it in a script or source file:
+        <pre>$secure = Read-Host "Admin password" -AsSecureString
+$ptr = [Runtime.InteropServices.Marshal]::SecureStringToBSTR($secure)
+try {
+  $env:CSE_HUB_ADMIN_PASSWORD = [Runtime.InteropServices.Marshal]::PtrToStringBSTR($ptr)
+  python server.py
+} finally {
+  [Runtime.InteropServices.Marshal]::ZeroFreeBSTR($ptr)
+  Remove-Item Env:CSE_HUB_ADMIN_PASSWORD -ErrorAction SilentlyContinue
+}</pre>
+      </li>
+      <li>Open <code>http://localhost:8000</code> in a browser. The server creates the SQLite database at <code>data/cse_hub.sqlite3</code>.</li>
+    </ol>
+
+    <h2>2. Site features</h2>
+    <p>The portal uses a Python and SQLite backend for CSE projects, hackathon stories, and problem statements. Project submissions must include a project URL, and both projects and hackathon experiences stay private until an administrator signs in at <code>http://localhost:8000/#admin</code> and approves them. Only approved projects and hackathon experiences appear on public pages. Rejected and pending submissions remain hidden from visitors.</p>
+    <p>The admin password is read from <code>CSE_HUB_ADMIN_PASSWORD</code>; if it is not configured, admin sign-in and review are unavailable. Admin sessions expire after eight hours and are cleared when the server restarts. Use HTTPS and a production-grade server and hosting setup for deployment; do not expose the development server directly to the public internet.</p>
+
+    <h2>3. Department content</h2>
+    <ul>
+      <li>The Faculty Directory currently uses the name and designation roster supplied for this project. Confirm the roster is current before production; the supplied information does not include qualifications, contact details, subjects, photographs, or other profile details.</li>
+      <li>Keep faculty directory information, club information, hackathon experiences, and problem statements accurate and verified.</li>
+      <li>Protect personal information and obtain appropriate consent before publishing student photos or private data.</li>
+    </ul>
+
+    <h2>4. Deployment</h2>
+    <ul>
+      <li>Deploy the Python application and its SQLite database to a host that supports persistent application servers, configure <code>CSE_HUB_ADMIN_PASSWORD</code> as a private environment secret, and serve the site over HTTPS. A static-only host cannot accept shared submissions.</li>
+      <li>Ensure all public routes resolve correctly and file paths remain relative.</li>
+      <li>Include the five root-level logo files (<code>college-logo.png</code>, <code>masters-club-logo.jpg</code>, <code>ar-vr-club-logo.jpeg</code>, <code>rotaract-club-logo.jpeg</code>, and <code>pragsoft-club-logo.jpeg</code>) in the Netlify publish folder when deploying.</li>
+      <li>Test the public pages at desktop and mobile sizes before publishing.</li>
+    </ul>
+  </body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="CSE Digital Hub for Pragati Engineering College — public department portal for faculty, hackathon experiences, problem statements, and clubs."
+    />
+    <title>CSE Digital Hub</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css?v=3" />
+    <link rel="stylesheet" href="responsive.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container header-panel">
+        <div class="header-eyebrow">Pragati Engineering College · CSE Department</div>
+        <div class="nav-wrap">
+          <a class="brand" href="#home" aria-label="CSE Digital Hub home">
+            <span class="brand-mark">
+              <img src="college-logo.png" alt="Pragati Engineering College emblem" />
+            </span>
+            <span class="brand-copy">
+              <strong>CSE Digital Hub</strong>
+              <small>Learn · Achieve · Innovate</small>
+            </span>
+          </a>
+
+          <nav class="main-nav" aria-label="Main navigation">
+            <button class="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="Open menu">
+              <span></span><span></span><span></span>
+            </button>
+            <div id="nav-menu" class="nav-menu">
+              <a href="#home" class="nav-link active">Home</a>
+              <a href="#faculty" class="nav-link">Faculty</a>
+              <a href="#projects" class="nav-link">Our Projects</a>
+              <a href="#admin" class="nav-link">Admin</a>
+              <a href="#hackathons" class="nav-link">Hackathon Experience</a>
+              <a href="#problem-statements" class="nav-link">Problem Statements</a>
+              <a href="#clubs" class="nav-link">Clubs</a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main id="app" class="page-shell" aria-live="polite"></main>
+
+    <div id="toast" class="toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+    <script src="validation.js"></script>
+    <script src="components.js"></script>
+    <script src="api.js?v=3"></script>
+    <script src="admin.js?v=3"></script>
+    <script src="navigation.js"></script>
+    <script src="search.js"></script>
+    <script src="home.js?v=5"></script>
+    <script src="faculty.js"></script>
+    <script src="projects.js?v=4"></script>
+    <script src="hackathons.js?v=5"></script>
+    <script src="problem-statements.js?v=4"></script>
+    <script src="clubs.js?v=6"></script>
+    <script src="app.js?v=3"></script>
+  </body>
+</html>
